@@ -80,6 +80,9 @@ def get_readable_time(seconds: int) -> str:
 
     return ping_time
 
+START_IMG = "https://te.legra.ph/file/d17dcf98ddb5720c44714.jpg"
+EMIKO_VIDA = "https://te.legra.ph/file/d17dcf98ddb5720c44714.jpg"
+EMIKO_VIDB = "https://te.legra.ph/file/d17dcf98ddb5720c44714.jpg"
 
 PM_START_TEXT = """
 *Hello {} !*
@@ -356,46 +359,35 @@ def help_button(update, context):
         pass
 
 
-def emiko_about_callback(update, context):
+@run_async
+def Emikocallback_handler(update, context):
     query = update.callback_query
-    if query.data == "emiko_":
+    if query.data == "Emiko":
         query.message.edit_text(
-            text="๏ I'm *Emiko*, a powerful group management bot built to help you manage your group easily."
-            "\n• I can restrict users."
-            "\n• I can greet users with customizable welcome messages and even set a group's rules."
-            "\n• I have an advanced anti-flood system."
-            "\n• I can warn users until they reach max warns, with each predefined actions such as ban, mute, kick, etc."
-            "\n• I have a note keeping system, blacklists, and even predetermined replies on certain keywords."
-            "\n• I check for admins' permissions before executing any command and more stuffs"
-            "\n\n_Emiko's licensed under the GNU General Public License v3.0_"
-            "\n\n Click on button bellow to get basic help for EmikoRobot.",
+            text="""𝙒𝙚𝙡𝙘𝙤𝙢𝙚 𝙩𝙤 𝙃𝙚𝙡𝙥 𝙈𝙚𝙣𝙪. 
+────────────────────────
+*Sᴇʟᴇᴄᴛ  Aʟʟ  Cᴏᴍᴍᴀɴᴅs  Fᴏʀ  Fᴜʟʟ  Hᴇʟᴘ  Oʀ  Sᴇʟᴇᴄᴛ  Cᴀᴛᴀɢᴏʀʏ  Fᴏʀ  Mᴏʀᴇ  Hᴇʟᴘ  Dᴏᴄᴜᴍᴇɴᴛᴀᴛɪᴏɴ  Oɴ  Sᴇʟᴇᴄᴛᴇᴅ  Fɪᴇʟᴅs*""",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                 [
-                 [
-                    InlineKeyboardButton(text="Admins", callback_data="emiko_admin"),
-                    InlineKeyboardButton(text="Notes", callback_data="emiko_notes"),
-                 ],
-                 [
-                    InlineKeyboardButton(text="Support", callback_data="emiko_support"),
-                    InlineKeyboardButton(text="Credits", callback_data="emiko_credit"),
-                 ],
-                 [
-                    InlineKeyboardButton(text="Source Code", url="https://github.com/kennedy-ex/EmikoRobot"),
-                 ],
-                 [
-                    InlineKeyboardButton(text="Go Back", callback_data="emiko_back"),
-                 ]
+                    [
+                     InlineKeyboardButton(text="➕ 𝘼𝙡𝙡 𝘾𝙤𝙢𝙢𝙖𝙣𝙙𝙨 ➕", callback_data="help_back"),
+                    ],                           
+                    [InlineKeyboardButton(text="𝙃𝙤𝙬 𝙏𝙤 𝙐𝙨𝙚 𝙈𝙚 ❓", callback_data="Emikohelp"),
+                     InlineKeyboardButton(text="𝙈𝙪𝙨𝙞𝙘 𝘽𝙤𝙩 🎧", callback_data="Emikomusic")],
+                    [InlineKeyboardButton(text="🔙 𝘽𝙖𝙘𝙠", callback_data="Emikoback"),
+                     InlineKeyboardButton(text="𝙁𝙪𝙣 𝙏𝙤𝙤𝙡𝙨 ⚙", callback_data="Emikotools")],
                 ]
             ),
         )
-    elif query.data == "emiko_back":
+    elif query.data == "Emikoback":
         first_name = update.effective_user.first_name
         uptime = get_readable_time((time.time() - StartTime))
         query.message.edit_text(
                 PM_START_TEXT.format(
                     escape_markdown(first_name),
+                    START_IMG,
                     escape_markdown(uptime),
                     sql.num_users(),
                     sql.num_chats()),
@@ -404,87 +396,456 @@ def emiko_about_callback(update, context):
                 timeout=60,
                 disable_web_page_preview=False,
         )
-
-    elif query.data == "emiko_admin":
+    elif query.data == "Emikohelp":
         query.message.edit_text(
-            text=f"*๏ Let's make your group bit effective now*"
-            "\nCongragulations, EmikoRobot now ready to manage your group."
-            "\n\n*Admin Tools*"
-            "\nBasic Admin tools help you to protect and powerup your group."
-            "\nYou can ban members, Kick members, Promote someone as admin through commands of bot."
-            "\n\n*Greetings*"
-            "\nLets set a welcome message to welcome new users coming to your group."
-            "\nsend `/setwelcome [message]` to set a welcome message!",
+            text=f"""*Nᴇᴡ  Tᴏ  {BOT_NAME}!  Hᴇʀᴇ  Is  Tʜᴇ  Qᴜɪᴄᴋ  Sᴛᴀʀᴛ  Gᴜɪᴅᴇ  Wʜɪᴄʜ  Wɪʟʟ  Hᴇʟᴘ  Yᴏᴜ  Tᴏ  Uɴᴅᴇʀsᴛᴀɴᴅ  Wʜᴀᴛ  Is  {BOT_NAME}  Aɴᴅ  Hᴏᴡ  Tᴏ  Usᴇ  Iᴛ.
+
+Cʟɪᴄᴋ  Bᴇʟᴏᴡ  Bᴜᴛᴛᴏɴ  Tᴏ  Aᴅᴅ  Bᴏᴛ  Iɴ  Yᴏᴜʀ  Gʀᴏᴜᴘ. Bᴀsɪᴄ  Tᴏᴜʀ  Sᴛᴀʀᴛᴇᴅ  Tᴏ  Kɴᴏᴡ  Aʙᴏᴜᴛ  Hᴏᴡ  Tᴏ  Usᴇ  Mᴇ*""",
+            parse_mode=ParseMode.MARKDOWN,
+            reply_markup=InlineKeyboardMarkup(
+              [[InlineKeyboardButton(text="𝙎𝙚𝙩𝙪𝙥 𝙏𝙪𝙩𝙤𝙧𝙞𝙖𝙡 🎥", callback_data="Emikovida")],
+               [InlineKeyboardButton(text="➕️ 𝘼𝙙𝙙 𝙢𝙚 𝙩𝙤 𝙔𝙤𝙪𝙧 𝙂𝙧𝙤𝙪𝙥 ➕️", url="https://t.me/{BOT_USERNAME}?startgroup=true")],       
+                [InlineKeyboardButton(text="🔙 𝘽𝙖𝙘𝙠", callback_data="Emiko"),
+                 InlineKeyboardButton(text="➡️", callback_data="Emikohelpa")]
+              ]
+            ),
+        )
+    elif query.data == "Emikohelpa":
+        query.message.edit_text(
+            text=f"""<b>Hᴇʏ,  Wᴇʟᴄᴏᴍᴇ  Tᴏ  Cᴏɴғɪɢᴜʀᴀᴛɪᴏɴ  Tᴜᴛᴏʀɪᴀʟ
+
+Bᴇғᴏʀᴇ  Wᴇ  Gᴏ,  I  Nᴇᴇᴅ  Aᴅᴍɪɴ  Pᴇʀᴍɪssɪᴏɴs  Iɴ  Tʜɪs  Cʜᴀᴛ  Tᴏ  Wᴏʀᴋ  Pʀᴏᴘᴇʀʟʏ.
+1). Cʟɪᴄᴋ  Mᴀɴᴀɢᴇ  Gʀᴏᴜᴘ.
+2). Gᴏ  Tᴏ  Aᴅᴍɪɴɪsᴛʀᴀᴛᴏʀs  Aɴᴅ  Aᴅᴅ</b>  {BOT_USERNAME}  <b>As  Aᴅᴍɪɴ.
+3). Gɪᴠɪɴɢ  Fᴜʟʟ  Pᴇʀᴍɪssɪᴏɴs  Mᴀᴋᴇ  Tɪᴀɴᴀ  Fᴜʟʟʏ  Usᴇғᴜʟ</b>""",
+            parse_mode=ParseMode.HTML,
+            reply_markup=InlineKeyboardMarkup(
+              [[InlineKeyboardButton(text="⬅️", callback_data="Emikohelp"),
+                InlineKeyboardButton(text="➡️", callback_data="Emikohelpb")],               
+              ]
+            ),
+        )
+    elif query.data == "Emikohelpb":
+        query.message.edit_text(
+            text="""*Cᴏɴɢʀᴀɢᴜʟᴀᴛɪᴏɴs,  Tʜɪꜱ  Bᴏᴛ  Nᴏᴡ  Rᴇᴀᴅʏ  Tᴏ  Mᴀɴᴀɢᴇ  Yᴏᴜʀ  Gʀᴏᴜᴘ
+
+Hᴇʀᴇ  Aʀᴇ  Sᴏᴍᴇ  Essᴇɴᴛɪᴀʟᴛ  Tᴏ  Tʀʏ  Oɴ Tɪᴀɴᴀ.
+
+×  Aᴅᴍɪɴ  Tᴏᴏʟs
+ʙᴀsɪᴄ  ᴀᴅᴍɪɴ  ᴛᴏᴏʟs  ʜᴇʟᴘ  ʏᴏᴜ  ᴛᴏ  ᴘʀᴏᴛᴇᴄᴛ  ᴀɴᴅ  ᴘᴏᴡᴇʀᴜᴘ  ʏᴏᴜʀ  ɢʀᴏᴜᴘ
+ʏᴏᴜ  ᴄᴀɴ  ʙᴀɴ  ᴍᴇᴍʙᴇʀs,  ᴋɪᴄᴋ  ᴍᴇᴍʙᴇʀs,  ᴘʀᴏᴍᴏᴛᴇ  sᴏᴍᴇᴏɴᴇ  ᴀs  ᴀᴅᴍɪɴ  ᴛʜʀᴏᴜɢʜ  ᴄᴏᴍᴍᴀɴᴅs  ᴏғ  ʙᴏᴛ
+
+×  Wᴇʟᴄᴏᴍᴇs
+ʟᴇᴛs  sᴇᴛ  ᴀ  ᴡᴇʟᴄᴏᴍᴇ  ᴍᴇssᴀɢᴇ  ᴛᴏ  ᴡᴇʟᴄᴏᴍᴇ  ɴᴇᴡ  ᴜsᴇʀs  ᴄᴏᴍɪɴɢ  ᴛᴏ  ʏᴏᴜʀ  ɢʀᴏᴜᴘ
+sᴇɴᴅ  /setwelcome  [ᴍᴇssᴀɢᴇ]  ᴛᴏ  sᴇᴛ  ᴀ  ᴡᴇʟᴄᴏᴍᴇ  ᴍᴇssᴀɢᴇ
+ᴀʟsᴏ  ʏᴏᴜ  ᴄᴀɴ  sᴛᴏᴘ  ᴇɴᴛᴇʀɪɴɢ  ʀᴏʙᴏᴛs  ᴏʀ  sᴘᴀᴍᴍᴇʀs  ᴛᴏ  ʏᴏᴜʀ  ᴄʜᴀᴛ  ʙʏ  sᴇᴛᴛɪɴɢ  ᴡᴇʟᴄᴏᴍᴇ  ᴄᴀᴘᴛᴄʜᴀ  
+
+Rᴇғᴇʀ  Hᴇʟᴘ  Mᴇɴᴜ  Tᴏ  Sᴇᴇ  Eᴠᴇʀʏᴛʜɪɴɢ  Iɴ  Dᴇᴛᴀɪʟ*""",
+            parse_mode=ParseMode.MARKDOWN,
+            reply_markup=InlineKeyboardMarkup(
+              [
+                [InlineKeyboardButton(text="⬅️", callback_data="Emikohelpa"),
+                 InlineKeyboardButton(text="➡️", callback_data="Emikohelpc")]
+                ]
+            ),
+        )
+    elif query.data == "Emikohelpc":
+        query.message.edit_text(
+            text="""*× Fɪʟᴛᴇʀs
+ғɪʟᴛᴇʀs  ᴄᴀɴ  ʙᴇ  ᴜsᴇᴅ  ᴀs  ᴀᴜᴛᴏᴍᴀᴛᴇᴅ  ʀᴇᴘʟɪᴇs/ʙᴀɴ/ᴅᴇʟᴇᴛᴇ  ᴡʜᴇɴ  sᴏᴍᴇᴏɴᴇ  ᴜsᴇ  ᴀ  ᴡᴏʀᴅ  ᴏʀ  sᴇɴᴛᴇɴᴄᴇ
+ғᴏʀ  ᴇxᴀᴍᴘʟᴇ  ɪғ  ɪ  ғɪʟᴛᴇʀ  ᴡᴏʀᴅ  'ʜᴇʟʟᴏ'  ᴀɴᴅ  sᴇᴛ  ʀᴇᴘʟʏ  ᴀs  'ʜɪ'
+ʙᴏᴛ  ᴡɪʟʟ  ʀᴇᴘʟʏ  ᴀs  'ʜɪ'  ᴡʜᴇɴ  sᴏᴍᴇᴏɴᴇ  sᴀʏ  'ʜᴇʟʟᴏ'
+ʏᴏᴜ  ᴄᴀɴ  ᴀᴅᴅ  ғɪʟᴛᴇʀs  ʙʏ  sᴇɴᴅɪɴɢ  /filter  ғɪʟᴛᴇʀ  ɴᴀᴍᴇ
+
+× Aɪ  CʜᴀᴛBᴏᴛ
+ᴡᴀɴᴛ  sᴏᴍᴇᴏɴᴇ  ᴛᴏ  ᴄʜᴀᴛ  ɪɴ  ɢʀᴏᴜᴘ?
+Tɪᴀɴᴀ  ʜᴀs  ᴀɴ  ɪɴᴛᴇʟʟɪɢᴇɴᴛ  ᴄʜᴀᴛʙᴏᴛ  ᴡɪᴛʜ  ᴍᴜʟᴛɪʟᴀɴɢ  sᴜᴘᴘᴏʀᴛ
+ʟᴇᴛ's  ᴛʀʏ  ɪᴛ,
+Sᴇɴᴅ  /chatbot  Oɴ  Aɴᴅ  Rᴇᴘʟʏ  Tᴏ  Aɴʏ  Oғ  Mʏ  Mᴇssᴀɢᴇs  Tᴏ  Sᴇᴇ  Tʜᴇ  Mᴀɢɪᴄ*""",
+            parse_mode=ParseMode.MARKDOWN,
+            reply_markup=InlineKeyboardMarkup(
+              [
+                [InlineKeyboardButton(text="⬅️", callback_data="Emikohelpb"),
+                 InlineKeyboardButton(text="➡️", callback_data="Emikohelpd")]
+                ]
+            ),
+        )
+    elif query.data == "Emikohelpd":
+        query.message.edit_text(
+            text="""*× Sᴇᴛᴛɪɴɢ  Uᴘ  Nᴏᴛᴇs
+ʏᴏᴜ  ᴄᴀɴ  sᴀᴠᴇ  ᴍᴇssᴀɢᴇ/ᴍᴇᴅɪᴀ/ᴀᴜᴅɪᴏ  ᴏʀ  ᴀɴʏᴛʜɪɴɢ  ᴀs  ɴᴏᴛᴇs ᴜsɪɴɢ /notes
+ᴛᴏ  ɢᴇᴛ  ᴀ  ɴᴏᴛᴇ  sɪᴍᴘʟʏ  ᴜsᴇ  #  ᴀᴛ  ᴛʜᴇ  ʙᴇɢɪɴɴɪɴɢ  ᴏғ  ᴀ  ᴡᴏʀᴅ
+sᴇᴇ  ᴛʜᴇ  ɪᴍᴀɢᴇ..
+
+× Sᴇᴛᴛɪɴɢ  Uᴘ  Nɪɢʜᴛᴍᴏᴅᴇ
+ʏᴏᴜ  ᴄᴀɴ  sᴇᴛ  ᴜᴘ  ɴɪɢʜᴛᴍᴏᴅᴇ  ᴜsɪɴɢ  /nightmode  ᴏɴ/ᴏғғ  ᴄᴏᴍᴍᴀɴᴅ.
+
+Nᴏᴛᴇ-  ɴɪɢʜᴛ  ᴍᴏᴅᴇ  ᴄʜᴀᴛs  ɢᴇᴛ  ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ  ᴄʟᴏsᴇᴅ  ᴀᴛ  12ᴘᴍ(ɪsᴛ)
+ᴀɴᴅ  ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ  ᴏᴘᴇɴɴᴇᴅ  ᴀᴛ  6ᴀᴍ(ɪsᴛ)  ᴛᴏ  ᴘʀᴇᴠᴇɴᴛ  ɴɪɢʜᴛ  sᴘᴀᴍs.*""",
+            parse_mode=ParseMode.MARKDOWN,
+            reply_markup=InlineKeyboardMarkup(
+              [
+                [InlineKeyboardButton(text="⬅️", callback_data="Emikohelpc"),
+                 InlineKeyboardButton(text="➡️", callback_data="Emikohelpe")]
+                ]
+            ),
+        )
+    elif query.data == "Emikoterm":
+        query.message.edit_text(
+            text=f"""✗ *Terms and Conditions:*
+
+- Only your first name, last name (if any) and username (if any) is stored for a convenient communication!
+- No group ID or it's messages are stored, we respect everyone's privacy.
+- Messages between Bot and you is only infront of your eyes and there is no backuse of it.
+- Watch your group, if someone is spamming your group, you can use the report feature of your Telegram Client.
+- Do not spam commands, buttons, or anything in bot PM.
+
+*NOTE:* Terms and Conditions might change anytime
+
+*Updates Channel:* @{UPDATE_CHANNEL}
+*Support Chat:* @{SUPPORT_GROUP}""",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="Go Back", callback_data="emiko_")]]
+                [[
+                InlineKeyboardButton(text="🔙 𝘽𝙖𝙘𝙠", callback_data="about_")]]
             ),
         )
-
-    elif query.data == "emiko_notes":
+    elif query.data == "Emikohelpe":
         query.message.edit_text(
-            text=f"<b>๏ Setting up notes</b>"
-            f"\nYou can save message/media/audio or anything as notes"
-            f"\nto get a note simply use # at the beginning of a word"
-            f"\n\nYou can also set buttons for notes and filters (refer help menu)",
+            text="""*× Sᴏ  Nᴏᴡ  Yᴏᴜ  Aʀᴇ  Aᴛ  Tʜᴇ  Eɴᴅ  Oғ  Bᴀsɪᴄ  Tᴏᴜʀ.  Bᴜᴛ  Tʜɪs  Is  Nᴏᴛ  Aʟʟ  I  Cᴀɴ  Dᴏ.
+
+Sᴇɴᴅ  /help  Iɴ  Bᴏᴛ  Pᴍ  Tᴏ  Aᴄᴄᴇss  Hᴇʟᴘ  Mᴇɴᴜ
+
+Tʜᴇʀᴇ  Aʀᴇ  Mᴀɴʏ  Hᴀɴᴅʏ  Tᴏᴏʟs  Tᴏ  Tʀʏ  Oᴜᴛ.  
+Aɴᴅ  Aʟsᴏ  Iғ  Yᴏᴜ  Hᴀᴠᴇ  Aɴʏ  Sᴜɢɢᴇssɪᴏɴs  Aʙᴏᴜᴛ  Mᴇ,  Dᴏɴ'ᴛ  Fᴏʀɢᴇᴛ  Tᴏ  tᴇʟʟ  Tʜᴇᴍ  Tᴏ  Dᴇᴠs
+
+Aɢᴀɪɴ  Tʜᴀɴᴋs  Fᴏʀ  Usɪɴɢ  Mᴇ
+
+× Bʏ  Usɪɴɢ  Tʜɪꜱ  Bᴏᴛ  Yᴏᴜ  Aʀᴇ  Aɢʀᴇᴇᴅ  Tᴏ  Oᴜʀ  Tᴇʀᴍs  &  Cᴏɴᴅɪᴛɪᴏɴs*""",
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton(text="➕ 𝘼𝙡𝙡 𝘾𝙤𝙢𝙢𝙖𝙣𝙙𝙨 ➕", callback_data="help_back")],
+                [InlineKeyboardButton(text="⬅️", callback_data="Emikohelpd"),
+                InlineKeyboardButton(text="𝙈𝙖𝙞𝙣 𝙈𝙚𝙣𝙪", callback_data="Emiko")]]
+            ),
+        )
+    elif query.data == "Emikomusic":
+        query.message.edit_text(
+            text=f"✗ *Hᴇʀᴇ Iꜱ Tʜᴇ Hᴇʟᴘ 「Aꜱꜱɪꜱᴛᴀɴᴛ」 Mᴏᴅᴜʟᴇ:*"
+            
+            f"\n\n1.) first, add me to your group."
+            f"\n\n2.) then promote me as admin and give all permissions except anonymous admin."
+            f"\n\n3.) add @{ASS_USERNAME} to your group."
+            f"\n\n4.) turn on the video chat first before start to play music."
+            f"\n\n*✗ Lets Enjoy The Emiko Music And Join Support Group @PrincexSupport*"
+            f"\n\n*✗ Pᴏᴡᴇʀᴇᴅ Bʏ:* @{UPDATE_CHANNEL}",
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(
+               [[InlineKeyboardButton(text="𝙎𝙚𝙩𝙪𝙥 𝙏𝙪𝙩𝙤𝙧𝙞𝙖𝙡 🎥", callback_data="Emikovidb")],
+                [InlineKeyboardButton(text="𝙋𝙡𝙖𝙮 𝘾𝙤𝙢𝙢𝙖𝙣𝙙𝙨", callback_data="Emikomusica"),
+                 InlineKeyboardButton(text="𝘽𝙤𝙩 𝘾𝙤𝙢𝙢𝙖𝙣𝙙𝙨", callback_data="Emikomusicc")],
+                [InlineKeyboardButton(text="𝘼𝙙𝙢𝙞𝙣 𝘾𝙤𝙢𝙢𝙖𝙣𝙙𝙨", callback_data="Emikomusicb"),
+                 InlineKeyboardButton(text="𝙀𝙭𝙩𝙧𝙖 𝘾𝙤𝙢𝙢𝙖𝙣𝙙𝙨", callback_data="Emikomusicd")],
+                [InlineKeyboardButton(text="🔙 𝘽𝙖𝙘𝙠", callback_data="Emiko")]
+               ]
+            ),
+        )
+    elif query.data == "Emikomusica":
+        query.message.edit_text(
+            text="""✗*Here is the help for Play Commands*:
+
+*Note*: Emiko Music Bot works on a single merged commands for Music and Video
+
+✗ *Youtube and Telegram Files*:
+
+/play [Reply to any Video or Audio] or [YT Link] or [Music Name]  
+- Stream Video or Music on Voice Chat by selecting inline Buttons you get
+
+
+✗ *Emiko Database Saved Playlists*:
+
+/createplaylist
+- Create Your Playlist on Emiko's Server with Custom Name
+
+/playlist 
+- Check Your Saved Playlist On Servers.
+
+/deleteplaylist
+- Delete any saved music in your playlist
+
+/playplaylist 
+- Start playing Your Saved Playlist on Emiko Servers.""",
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton(text="🔙 𝘽𝙖𝙘𝙠", callback_data="Emikomusic")]]
+            ),
+        )
+    elif query.data == "Emikomusicb":
+        query.message.edit_text(
+            text="""✗ *Here is the help for Admin Commands*:
+
+
+✗ *Admin Commands*:
+
+/pause 
+- Pause the playing music on voice chat.
+
+/resume
+- Resume the paused music on voice chat.
+
+/skip
+- Skip the current playing music on voice chat
+
+/end or /stop
+- Stop the playout.
+
+
+✗ *Authorised Users List*:
+
+Emiko has a additional feature for non-admin users who want to use admin commands
+-Auth users can skip, pause, stop, resume Voice Chats even without Admin Rights.
+
+
+/auth [Username or Reply to a Message] 
+- Add a user to AUTH LIST of the group.
+
+/unauth [Username or Reply to a Message] 
+- Remove a user from AUTH LIST of the group.
+
+/authusers 
+- Check AUTH LIST of the group.""",
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton(text="🔙 𝘽𝙖𝙘𝙠", callback_data="Emikomusic")]]
+            ),
+        )
+    elif query.data == "Emikomusicc":
+        query.message.edit_text(
+            text="""✗ *Here is the help for Bot Commands*:
+
+
+/start 
+- Start the Emiko Music Bot.
+
+/help 
+- Get Commands Helper Menu with detailed explanations of commands.
+
+/settings 
+- Get Settings dashboard of a group. You can manage Auth Users Mode. Commands Mode from here.
+
+/ping
+- Ping the Bot and check Ram, Cpu etc stats of Emiko.""",
             parse_mode=ParseMode.HTML,
             reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="Go Back", callback_data="emiko_")]]
+                [[InlineKeyboardButton(text="🔙 𝘽𝙖𝙘𝙠", callback_data="Emikomusic")]]
             ),
         )
-    elif query.data == "emiko_support":
+    elif query.data == "Emikomusicd":
         query.message.edit_text(
-            text="*๏ Emiko support chats*"
-            "\nJoin My Support Group/Channel for see or report a problem on Emiko.",
+            text=""" *Here is the help for Extra Commands*:
+
+
+
+/lyrics [Music Name]
+- Searches Lyrics for the particular Music on web.
+
+/sudolist 
+- Check Sudo Users of Emiko Music Bot
+
+/song [Track Name] or [YT Link]
+- Download any track from youtube in mp3 or mp4 formats via Emiko.
+
+/queue
+- Check Queue List of Music.
+
+/cleanmode [Enable|Disable]
+- When enabled, Emiko will be deleting her 3rd last message to keep your chat clean.""",
+            parse_mode=ParseMode.HTML,
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton(text="🔙 𝘽𝙖𝙘𝙠", callback_data="Emikomusic")]]
+            ),
+        )
+    elif query.data == "Emikoabout":
+        query.message.edit_text(
+            text=f"""{BOT_NAME} it's online since January 2022 and it's constantly updated!
+            
+Bot Admins
+                       
+• @{OWNER_USERNAME}, bot creator and main developer.
+            
+• The Doctor, server manager and developer.
+            
+• Manuel 5, developer.
+            
+Support
+            
+• [Click here](https://t.me/{SUPPORT_CHAT}) to consult the updated list of Official Supporters of the bot.
+            
+• Thanks to all our donors for supporting server and development expenses and all those who have reported bugs or suggested new features.
+            
+• We also thank all the groups who rely on our Bot for this service, we hope you will always like it: we are constantly working to improve it!""",
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton(text="🔙 𝘽𝙖𝙘𝙠", callback_data="about_")]]
+            ),
+        )
+    elif query.data == "Emikosupport":
+        query.message.edit_text(
+            text=f"*{BOT_NAME} Support Chats*",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
                 [
                  [
-                    InlineKeyboardButton(text="Support", url="t.me/emikosupport"),
-                    InlineKeyboardButton(text="Updates", url="https://t.me/KennedyProject"),
+                    InlineKeyboardButton(text="Nᴇᴡꜱ", url=f"t.me/{UPDATE_CHANNEL}"),
+                    InlineKeyboardButton(text="Dᴏɴᴀᴛᴇ Mᴇ", url=f"{DONATION_LINK}"),
                  ],
                  [
-                    InlineKeyboardButton(text="Go Back", callback_data="emiko_"),
+                    InlineKeyboardButton(text="Sᴜᴘᴘᴏʀᴛ", url=f"t.me/{SUPPORT_CHAT}"),
+                    InlineKeyboardButton(text="Uᴘᴅᴀᴛᴇꜱ", url=f"https://t.me/{UPDATE_CHANNEL}"),
+                 ],
+                 [
+                    InlineKeyboardButton(text="🔙 𝘽𝙖𝙘𝙠", callback_data="about_"),
                  
                  ]
                 ]
             ),
         )
-
-
-    elif query.data == "emiko_credit":
+    elif query.data == "Emikotools":
         query.message.edit_text(
-            text=f"๏ Credis for Emiko\n"
-            "\nHere Developers Making And Give Inspiration For Made The EmikoRobot",
+            text="""*Here is the help for the tools module:
+We promise to keep you latest up-date with the latest technology on telegram. 
+we updradge EmikoRobot everyday to simplifie use of telegram and give a better exprince to users.
+
+Click on below buttons and check amazing tools for users.*""",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
                 [
                  [
-                    InlineKeyboardButton(text="sena-ex", url="https://github.com/kennedy-ex"),
-                    InlineKeyboardButton(text="TheHamkerCat", url="https://github.com/TheHamkerCat"),
+                    InlineKeyboardButton(text="Sᴇᴀʀᴄʜ", callback_data="Emikotoola"),
+                    InlineKeyboardButton(text="Tᴀɢᴀʟʟ", callback_data="Emikotoolb"),
+                    InlineKeyboardButton(text="Kᴀʀᴍᴀ", callback_data="Emikotoolc"),
                  ],
                  [
-                    InlineKeyboardButton(text="Feri", url="https://github.com/FeriEXP"),
-                    InlineKeyboardButton(text="riz-ex", url="https://github.com/riz-ex"),
+                    InlineKeyboardButton(text="Fᴏɴᴛ Gᴇɴ", callback_data="Emikotoold"),
+                    InlineKeyboardButton(text="Pᴀꜱᴛᴇ", callback_data="Emikotoole"),
+                    InlineKeyboardButton(text="Tᴇʟᴇɢʀᴀᴘʜ", callback_data="Emikotoolf"),
                  ],
                  [
-                    InlineKeyboardButton(text="Anime Kaizoku", url="https://github.com/animekaizoku"),
-                    InlineKeyboardButton(text="TheGhost Hunter", url="https://github.com/HuntingBots"),
-                 ],
-                 [
-                    InlineKeyboardButton(text="Inuka Asith", url="https://github.com/inukaasith"),
-                    InlineKeyboardButton(text="Noob-Kittu", url="https://github.com/noob-kittu"),
-                 ],
-                 [
-                    InlineKeyboardButton(text="Queen Arzoo", url="https://github.com/QueenArzoo"),
-                    InlineKeyboardButton(text="Paul Larsen", url="https://github.com/PaulSonOfLars"),
-                 ],
-                 [
-                    InlineKeyboardButton(text="Go Back", callback_data="emiko_"),
+                    InlineKeyboardButton(text="🔙 𝘽𝙖𝙘𝙠", callback_data="Emiko"),
+                 
                  ]
                 ]
             ),
+        )
+    elif query.data == "Emikotoola":
+        query.message.edit_text(
+            text="""「 Hᴇʟᴘ ᴏғ Sᴇᴀʀᴄʜ 」:
+
+ ❍ /google text: Perform a google search
+ ❍ /img text: Search Google for images and returns them
+ ❍ /app appname: Searches for an app in Play Store and returns its details.
+ ❍ /reverse: Does a reverse image search of the media which it was replied to.""",
+            parse_mode=ParseMode.HTML,
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton(text="🔙 𝘽𝙖𝙘𝙠", callback_data="Emikotools")]]
+            ),
+        )
+    elif query.data == "Emikotoolb":
+        query.message.edit_text(
+            text="""「 Hᴇʟᴘ ᴏғ Tᴀɢᴀʟʟ 」:
+
+ ❍ /tagall or @all '(reply to message or add another message) To mention all members in your group, without exception.
+
+Note- Only admins can Use Tagall Command.""",
+            parse_mode=ParseMode.HTML,
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton(text="🔙 𝘽𝙖𝙘𝙠", callback_data="Emikotools")]]
+            ),
+        )
+    elif query.data == "Emikotoolc":
+        query.message.edit_text(
+            text="""「 Hᴇʟᴘ ᴏғ Kᴀʀᴍᴀ 」:
+
+UPVOTE - Use upvote keywords like "+", "+1", "thanks" etc to upvote a cb.message.
+DOWNVOTE - Use downvote keywords like "-", "-1", etc to downvote a cb.message.
+
+- /karma ON/OFF: Enable/Disable karma in group. 
+- /karma Reply to a message: Check user's karma
+- /karma: Chek karma list of top 10 users""",
+            parse_mode=ParseMode.HTML,
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton(text="🔙 𝘽𝙖𝙘𝙠", callback_data="Emikotools")]]
+            ),
+        )
+    elif query.data == "Emikotoold":
+        query.message.edit_text(
+            text="""「 Hᴇʟᴘ ᴏғ Fᴏɴᴛ Gᴇɴ 」:
+
+ - /weebify text: weebify your text!
+ - /bis text: bold your text!
+ - /bi text: bold-italic your text!
+ - /tiny text: tiny your text!
+ - /fsquare text: square-filled your text!
+ - /blue text: bluify your text!
+ - /latin text: latinify your text!
+ - /lined text: lined your text!""",
+            parse_mode=ParseMode.HTML,
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton(text="🔙 𝘽𝙖𝙘𝙠", callback_data="Emikotools")]]
+            ),
+        )
+    elif query.data == "Emikotoole":
+        query.message.edit_text(
+            text="""「 Hᴇʟᴘ ᴏғ Pᴀꜱᴛᴇ 」:
+
+ ❍ /paste: Saves replied content to replies with a url""",
+            parse_mode=ParseMode.HTML,
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton(text="🔙 𝘽𝙖𝙘𝙠", callback_data="Emikotools")]]
+            ),
+        )
+    elif query.data == "Emikotoolf":
+        query.message.edit_text(
+            text="""「 Hᴇʟᴘ ᴏғ Tᴇʟᴇɢʀᴀᴘʜ 」:
+
+ ❍ /tm :Get Telegraph Link Of Replied Media
+ ❍ /txt :Get Telegraph Link of Replied Text""",
+            parse_mode=ParseMode.HTML,
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton(text="🔙 𝘽𝙖𝙘𝙠", callback_data="Emikotools")]]
+            ),
+        )
+    elif query.data == "Emikosource":
+        query.message.edit_text(
+            text="""*Emikobot is Now Open Source Bot Project.*
+
+*Click below Button to Get Source Code.*""",
+            parse_mode=ParseMode.MARKDOWN,
+            reply_markup=InlineKeyboardMarkup(
+                [
+                 [
+                    InlineKeyboardButton(text="📄 𝙎𝙤𝙪𝙧𝙘𝙚", url="github.com/Prince-Botz/Emikobot"),
+                 ]
+                ]
+            ),
+        )
+    elif query.data == "Emikovida":
+        query.message.reply_video(
+            EMIKO_VIDA,
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,           
+        )
+    elif query.data == "Emikovidb":
+        query.message.reply_video(
+            EMIKO_VIDB,
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,           
         )
 
 def Source_about_callback(update, context):
@@ -822,7 +1183,7 @@ def main():
     )
 
     about_callback_handler = CallbackQueryHandler(
-        emiko_about_callback, pattern=r"emiko_", run_async=True
+        Emiko_about_callback, pattern=r"Emiko_", run_async=True
     )
 
     source_callback_handler = CallbackQueryHandler(
